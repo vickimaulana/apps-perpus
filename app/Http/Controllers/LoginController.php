@@ -27,5 +27,11 @@ class LoginController extends Controller
         return back()->withErrors(['email' => 'Email atau password salah'])->onlyInput('email');
     }
 
+    public function logout(Request $request){
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
+        return redirect('login');
+    }
 }
