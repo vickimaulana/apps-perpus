@@ -20,6 +20,21 @@
                         <i class="bi bi-circle"></i><span>Anggota</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('lokasi.index') }}">
+                        <i class="bi bi-circle"></i><span>Lokasi Buku</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('kategori.index') }}">
+                        <i class="bi bi-circle"></i><span>Kategori Buku</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('buku.index') }}">
+                        <i class="bi bi-circle"></i><span>Buku</span>
+                    </a>
+                </li>
                 {{-- <li>
                     <a href="">
                         <i class="bi bi-circle"></i><span>Kategori Kamar</span>

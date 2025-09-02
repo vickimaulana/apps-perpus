@@ -29,6 +29,29 @@ Route::middleware('auth')->group(function (){
     Route::get('anggota/restore/{id}', [\App\Http\Controllers\AnggotaController::class, 'restore'])->name('anggota.restore');
     Route::delete('anggota/destroy/destroy/{id}', [\App\Http\Controllers\AnggotaController::class,'destroy'])->name('anggota.destroy');
 
+    //Lokasi
+    Route::get('lokasi/index', [\App\Http\Controllers\locationController::class, 'index'])->name('lokasi.index');
+    Route::get('lokasi/create', [\App\Http\Controllers\locationController::class, 'create'])->name('lokasi.create');
+    Route::post('lokasi/store', [\App\Http\Controllers\locationController::class, 'store'])->name('lokasi.store');
+    Route::get('lokasi/edit/{id}', [\App\Http\Controllers\locationController::class, 'edit'])->name('lokasi.edit');
+    Route::put('lokasi/update/{id}', [\App\Http\Controllers\locationController::class, 'update'])->name('lokasi.update');
+    Route::delete('lokasi/destroy/{id}', [\App\Http\Controllers\locationController::class, 'destroy'])->name('lokasi.destroy');
+
+    //kategori
+    Route::get('kategori/index', [\App\Http\Controllers\CategoryController::class, 'index'])->name('kategori.index');
+    Route::get('kategori/create', [\App\Http\Controllers\CategoryController::class, 'create'])->name('kategori.create');
+    Route::post('kategori/store', [\App\Http\Controllers\CategoryController::class, 'store'])->name('kategori.store');
+    Route::get('kategori/edit/{id}', [\App\Http\Controllers\CategoryController::class, 'edit'])->name('kategori.edit');
+    Route::put('kategori/update/{id}', [\App\Http\Controllers\CategoryController::class, 'update'])->name('kategori.update');
+    Route::delete('kategori/destroy/{id}', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('kategori.destroy');
+
+    //Buku
+    Route::get('buku/index', [\App\Http\Controllers\BookController::class, 'index'])->name('buku.index');
+    Route::get('buku/create', [\App\Http\Controllers\BookController::class, 'create'])->name('buku.create');
+    Route::post('buku/store', [\App\Http\Controllers\BookController::class, 'store'])->name('buku.store');
+    Route::get('buku/edit/{id}', [\App\Http\Controllers\BookController::class, 'edit'])->name('buku.edit');
+    Route::put('buku/update/{id}', [\App\Http\Controllers\BookController::class, 'update'])->name('buku.update');
+    Route::delete('buku/destroy/{id}', [\App\Http\Controllers\BookController::class, 'destroy'])->name('buku.destroy');
 });
 
 // // Halaman utama daftar bangun ruang
