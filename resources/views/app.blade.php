@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>{{ $title ?? 'Management Hotel' }}</title>
+    <title>{{ $title ?? '' }}</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -31,6 +31,7 @@
 
     <!-- Template Main CSS File -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+
 
     <!-- =======================================================
   * Template Name: NiceAdmin
@@ -85,6 +86,82 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+    <script>
+    let category = document.getElementById('id_kategori');
+    category.addEventListener('change', async function() {
+        const id_category = this.value; //Artinya si selector id-category, mau ambil value
+        const selectBuku = document.querySelector('#id_buku');
+        selectBuku.innerHTML = "<option value=''>Pilih Buku...</option>"
+
+        if (!category) {
+            selectBuku.innerHTML = "<option value=''>Pilih Buku</option>"
+            return;
+        }
+
+        try {
+            const res = await fetch(`/get-buku/${id_category}`);
+            const data = await res.json();
+            data.data.forEach(buku => {
+                const option = document.createElement('option');
+                option.value = buku.id;
+                option.textContent = buku.judul;
+                selectBuku.appendChild(option);
+            });
+        } catch (error) {
+            console.log("error", error);
+        }
+    });
+    let count =1;
+    // const selectBook = document.querySelector('#id_buku');
+
+
+    // document.querySelector('#addRow').addEventListener('click', function(){
+    //     const tbody = document.querySelector('#tableTrans tbody');
+    //     if (!selectBook.value) {
+    //         alert('Silahkan pilih buku telebih dahulu!!')
+    //         return;
+    //     }
+    //     const bookName   = selectBook.options[selectBook.selectedIndex]?.text || '';
+    //     count++;
+    //     const tr = document.createElement('tr');
+    //     const tdNo = document.createElement('td');
+    //     tdNo.textContent = count;
+    //     tr.appendChild(tdNo);
+
+    //     const tdNama = document.createElement('td');
+    //     tdNama.textContent = bookName;
+    //     tr.appendChild(tdNama);
+
+    //     const tdAction = document.createElement('td');
+    //     const delBtn   = document.createElement('button');
+    //     delBtn.textContent = "Hapus";
+    //     tdAction.appendChild(delBtn);
+    //     tr.appendChild(tdAction);
+    //     // tdAction.innerHTML = `<button class="btn btn-danger">Delete</button>`;
+
+    //     tbody.appendChild(tr);
+    // });
+
+    document.getElementById('addRow').addEventListener('click', function(){
+        const tbody = document.querySelector('#tableTrans tbody');
+        const selectBook    = document.getElementById('id_buku');
+        const idBook = selectBook.value;
+        const NameBook = selectBook.options[selectBook.selectedIndex]?.text || '';
+
+        if (!idBook) {
+            alert('select buku dulu!!!');
+            return;
+        }
+
+        const no = count++
+        // const no = tbody.querySelectorAll('tr').length + 1;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${no}</td>
+        <td>${NameBook}</td>
+        <td><button class='btn btn-danger'>Hapus</button</td>`
+        tbody.appendChild(tr);
+    });
+</script>
 </body>
 
 </html>

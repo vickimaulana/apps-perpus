@@ -31,12 +31,12 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-      location::create([
-           'kode_lokasi' => $request->kode_lokasi,
-            'label' => $request->label,
-            'rak' => $request->rak
-      ]);
-      return redirect()->to('lokasi/index');
+        location::create([
+             'kode_lokasi' => $request->kode_lokasi,
+              'label' => $request->label,
+              'rak' => $request->rak
+        ]);
+        return redirect()->to('lokasi/index');
     }
 
     /**
@@ -63,17 +63,17 @@ class LocationController extends Controller
     {
         $location = location::find($id);
         $rules = [
-            'kode_lokasi'=>['required'],
-            'label'=>['required'],
-            'rak'=>['required'],
+            'kode_lokasi' => ['required'],
+            'label' => ['required'],
+            'rak' => ['required'],
         ];
-        $validator = Validator::make ($request->all(), $rules);
-        if ($validator->fails()){
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
-        $location->kode_lokasi= $request->kode_lokasi;
-        $location->label= $request->label;
-        $location->rak= $request->rak;
+        $location->kode_lokasi = $request->kode_lokasi;
+        $location->label = $request->label;
+        $location->rak = $request->rak;
         $location->save();
         return redirect()->to('lokasi/index');
     }

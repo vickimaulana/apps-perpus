@@ -26,7 +26,7 @@ class AnggotaController extends Controller
     public function create()
     {
         $lasId = DB::table('members')->max('id') ?? 0;
-        $newId = $lasId +1;
+        $newId = $lasId + 1;
         $pref  = 'MEMBER';
         $date = now()->format('d-m-Y');
         $counter = str_pad($newId, 5, '0', STR_PAD_LEFT);
@@ -46,33 +46,34 @@ class AnggotaController extends Controller
             'no_hp' => ['required', 'unique:members'],
             'email' => ['required', 'unique:members'],
         ];
-        $validators = Validator::make($request->all(),$rulles);
-        if ($validators->fails()){
-        return back()->withErrors($validators)->withInput();
+        $validators = Validator::make($request->all(), $rulles);
+        if ($validators->fails()) {
+            return back()->withErrors($validators)->withInput();
         }
 
         Members::create([
-            'nomor_anggota' =>$request->nomor_anggota,
-            'nik' =>$request->nik,
-            'nama_anggota' =>$request->nama_anggota,
-            'no_hp' =>$request->no_hp,
-            'email' =>$request->email,
+            'nomor_anggota' => $request->nomor_anggota,
+            'nik' => $request->nik,
+            'nama_anggota' => $request->nama_anggota,
+            'no_hp' => $request->no_hp,
+            'email' => $request->email,
         ]);
         return redirect()->to('anggota/index');
     }
 
     public function softDelete(string $id)
     {
-    $members = Members::find($id);
-    $members->delete();
-    return redirect()->to('anggota/index');
+        $members = Members::find($id);
+        $members->delete();
+        return redirect()->to('anggota/index');
     }
     public function indexRestore()
     {
-       $members_r = Members::onlyTrashed()->get();
+        $members_r = Members::onlyTrashed()->get();
         return view('anggota.restore.restore', compact('members_r'));
     }
-    public function restore(string $id){
+    public function restore(string $id)
+    {
         $members = Members::withTrashed()->find($id);
         $members->restore();
         return redirect()->to('anggota/index');
@@ -100,25 +101,25 @@ class AnggotaController extends Controller
     public function update(Request $request, string $id)
     {
         $members = Members::find($id);
-          $rulles = [
-            'nomor_anggota' => ['required'],
-            'nik' => ['required', 'numeric'],
-            'nama_anggota' => ['required'],
-            'no_hp' => ['required'],
-            'email' => ['required'],
+        $rulles = [
+          'nomor_anggota' => ['required'],
+          'nik' => ['required', 'numeric'],
+          'nama_anggota' => ['required'],
+          'no_hp' => ['required'],
+          'email' => ['required'],
         ];
-        $validators = Validator::make($request->all(),$rulles);
-        if ($validators->fails()){
-        return back()->withErrors($validators)->withInput();
+        $validators = Validator::make($request->all(), $rulles);
+        if ($validators->fails()) {
+            return back()->withErrors($validators)->withInput();
         }
         // $members->fill($request->all());
-         $members->nomor_anggota= $request->nomor_anggota;
-         $members->nik= $request->nik;
-         $members->nama_anggota= $request->nama_anggota;
-         $members->no_hp= $request->no_hp;
-         $members->email= $request->email;
-         $members->save();
-         return redirect()->to('anggota/index');
+        $members->nomor_anggota = $request->nomor_anggota;
+        $members->nik = $request->nik;
+        $members->nama_anggota = $request->nama_anggota;
+        $members->no_hp = $request->no_hp;
+        $members->email = $request->email;
+        $members->save();
+        return redirect()->to('anggota/index');
     }
 
     /**

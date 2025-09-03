@@ -1,4 +1,3 @@
-create.blade.php:
 @extends('app')
 @section('title', $title ?? 'Form Anggota ')
 
@@ -9,7 +8,7 @@ create.blade.php:
             <div>
                 @foreach ($errors->all() as $i )
                     <ul style="background-color: red">
-                        <li>{{$i}}</li>
+                    <li>{{$i}}</li>
                     </ul>
                 @endforeach
             </div>

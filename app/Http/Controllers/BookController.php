@@ -27,7 +27,7 @@ class BookController extends Controller
     {
         $location = location::all();
         $category = category::all();
-        return view('buku.create', compact('location','category'));
+        return view('buku.create', compact('location', 'category'));
     }
 
     /**
@@ -36,28 +36,28 @@ class BookController extends Controller
     public function store(Request $request)
     {
         $rules = [
-        'id_lokasi'=>['required'],
-        'id_kategori'=>['required'],
-        'judul'=>['required'],
-        'pengarang'=>['required'],
-        'penerbit'=>['required'],
-        'tahun_terbit'=>['required'],
-        'keterangan'=>['nullable'],
-        'stock'=>['required']
+            'id_lokasi' => ['required'],
+            'id_kategori' => ['required'],
+            'judul' => ['required'],
+            'pengarang' => ['required'],
+            'penerbit' => ['required'],
+            'tahun_terbit' => ['required'],
+            'keterangan' => ['nullable'],
+            'stock' => ['required']
         ];
-        $validator = Validator::make($request->all(),$rules);
-        if ($validator->fails()){
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
         book::create([
-        'id_lokasi'=>$request->id_lokasi,
-        'id_kategori'=>$request->id_kategori,
-        'judul'=>$request->judul,
-        'pengarang'=>$request->pengarang,
-        'penerbit'=>$request->penerbit,
-        'tahun_terbit'=>$request->tahun_terbit,
-        'keterangan'=>$request->keterangan,
-        'stock'=>$request->stock
+            'id_lokasi' => $request->id_lokasi,
+            'id_kategori' => $request->id_kategori,
+            'judul' => $request->judul,
+            'pengarang' => $request->pengarang,
+            'penerbit' => $request->penerbit,
+            'tahun_terbit' => $request->tahun_terbit,
+            'keterangan' => $request->keterangan,
+            'stock' => $request->stock
         ]);
         return redirect()->to('buku/index');
     }
@@ -78,7 +78,7 @@ class BookController extends Controller
         $book = book::find($id);
         $location = location::all();
         $category = category::all();
-       return view('buku.edit', compact('book', 'location', 'category'));
+        return view('buku.edit', compact('book', 'location', 'category'));
     }
 
     /**
@@ -88,17 +88,17 @@ class BookController extends Controller
     {
         $book = Book::find($id);
         $rules = [
-        'id_lokasi'=>['required'],
-        'id_kategori'=>['required'],
-        'judul'=>['required'],
-        'pengarang'=>['required'],
-        'penerbit'=>['required'],
-        'tahun_terbit'=>['required'],
-        'keterangan'=>['nullable'],
-        'stock'=>['required']
+            'id_lokasi' => ['required'],
+            'id_kategori' => ['required'],
+            'judul' => ['required'],
+            'pengarang' => ['required'],
+            'penerbit' => ['required'],
+            'tahun_terbit' => ['required'],
+            'keterangan' => ['nullable'],
+            'stock' => ['required']
         ];
-        $validator = Validator::make($request->all(),$rules);
-        if ($validator->fails()){
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
         $book->id_lokasi = $request->id_lokasi;

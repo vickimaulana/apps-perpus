@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function login(){
+    public function login()
+    {
 
         return view('login');
     }
@@ -20,14 +21,15 @@ class LoginController extends Controller
             'password'  => 'required|min:8',
         ]);
         //jika user ditemukan / berhasil login
-        if(Auth::attempt($request->only('email', 'password'))){
+        if (Auth::attempt($request->only('email', 'password'))) {
             return redirect()->intended('/dashboard')->with('succes', 'login berhasil');
         }
         // jika gagal
         return back()->withErrors(['email' => 'Email atau password salah'])->onlyInput('email');
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();

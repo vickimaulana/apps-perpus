@@ -48,7 +48,7 @@ class BangunRuangController extends Controller
         $volume = null;
 
         if ($s !== null && $t !== null && is_numeric($s) && is_numeric($t)) {
-            $volume = (1/3) * pow($s, 2) * $t;
+            $volume = (1 / 3) * pow($s, 2) * $t;
         }
 
         return view('layouts.bangunruang.limas', compact('s', 't', 'volume'));
@@ -62,8 +62,8 @@ class BangunRuangController extends Controller
         $luas = null;
 
         if ($r !== null && $t !== null && is_numeric($r) && is_numeric($t)) {
-            $volume = (22/7) * pow($r, 2) * $t;
-            $luas = 2 * (22/7) * $r * ($r + $t);
+            $volume = (22 / 7) * pow($r, 2) * $t;
+            $luas = 2 * (22 / 7) * $r * ($r + $t);
         }
 
         return view('layouts.bangunruang.tabung', compact('r', 't', 'volume', 'luas'));
@@ -76,8 +76,8 @@ class BangunRuangController extends Controller
         $luas = null;
 
         if ($r !== null && is_numeric($r)) {
-            $volume = (4/3) * (22/7) * pow($r, 3);
-            $luas = 4 * (22/7) * pow($r, 2);
+            $volume = (4 / 3) * (22 / 7) * pow($r, 3);
+            $luas = 4 * (22 / 7) * pow($r, 2);
         }
 
         return view('layouts.bangunruang.bola', compact('r', 'volume', 'luas'));

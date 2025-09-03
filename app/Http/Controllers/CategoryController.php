@@ -31,7 +31,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-                category::create([
+        category::create([
             'nama_kategori' => $request->nama_kategori
         ]);
         return redirect()->to('kategori/index');
@@ -64,7 +64,7 @@ class CategoryController extends Controller
             'nama_kategori' => ['required'],
         ];
         $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()){
+        if ($validator->fails()) {
             return back()->withErrors($validator);
         }
         $category->nama_kategori = $request->nama_kategori;

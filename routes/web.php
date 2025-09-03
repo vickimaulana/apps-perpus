@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\AnggotaController;
@@ -15,16 +14,16 @@ Route::get('login', [\App\Http\Controllers\LoginController::class, 'login'])->na
 Route::post('login', [\App\Http\Controllers\LoginController::class, 'actionlogin'])->name('login');
 
 
-Route::middleware('auth')->group(function (){
-    Route::get('dashboard', [\App\Http\Controllers\HomeController::class,'index']);
+Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [\App\Http\Controllers\HomeController::class, 'index']);
     Route::post('logout', [\App\Http\Controllers\LoginController::class, 'logout']);
     //Anggota
-    Route::get('anggota/index', [\App\Http\Controllers\AnggotaController::class,'index'])->name('anggota.index');
-    Route::get('anggota/create', [\App\Http\Controllers\AnggotaController::class,'create'])->name('anggota.create');
-    Route::post('anggota/store', [\App\Http\Controllers\AnggotaController::class,'store'])->name('anggota.store');
-    Route::get('anggota/edit/{id}', [\App\Http\Controllers\AnggotaController::class,'edit'])->name('anggota.edit');
-    Route::put('anggota/update/{id}', [\App\Http\Controllers\AnggotaController::class,'update'])->name('anggota.update');
-    Route::delete('anggota/destroy/{id}', [\App\Http\Controllers\AnggotaController::class,'softDelete'])->name('anggota.softdelete');
+    Route::get('anggota/index', [\App\Http\Controllers\AnggotaController::class, 'index'])->name('anggota.index');
+    Route::get('anggota/create', [\App\Http\Controllers\AnggotaController::class, 'create'])->name('anggota.create');
+    Route::post('anggota/store', [\App\Http\Controllers\AnggotaController::class, 'store'])->name('anggota.store');
+    Route::get('anggota/edit/{id}', [\App\Http\Controllers\AnggotaController::class, 'edit'])->name('anggota.edit');
+    Route::put('anggota/update/{id}', [\App\Http\Controllers\AnggotaController::class, 'update'])->name('anggota.update');
+    Route::delete('anggota/destroy/{id}', [\App\Http\Controllers\AnggotaController::class, 'softDelete'])->name('anggota.softdelete');
     Route::get('anggota/restore', [\App\Http\Controllers\AnggotaController::class, 'indexRestore'])->name('anggota.index-restore');
     Route::get('anggota/restore/{id}', [\App\Http\Controllers\AnggotaController::class, 'restore'])->name('anggota.restore');
     Route::delete('anggota/destroy/destroy/{id}', [\App\Http\Controllers\AnggotaController::class,'destroy'])->name('anggota.destroy');
@@ -52,6 +51,10 @@ Route::middleware('auth')->group(function (){
     Route::get('buku/edit/{id}', [\App\Http\Controllers\BookController::class, 'edit'])->name('buku.edit');
     Route::put('buku/update/{id}', [\App\Http\Controllers\BookController::class, 'update'])->name('buku.update');
     Route::delete('buku/destroy/{id}', [\App\Http\Controllers\BookController::class, 'destroy'])->name('buku.destroy');
+
+    //Pinjam Buku
+    Route::resource('transaction', \App\Http\Controllers\TransactionController::class);
+    Route::get('get-buku/{id}', [\App\Http\Controllers\TransactionController::class, 'getBukuByIdCategory']);
 });
 
 // // Halaman utama daftar bangun ruang
