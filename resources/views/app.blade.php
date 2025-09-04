@@ -157,9 +157,20 @@
         // const no = tbody.querySelectorAll('tr').length + 1;
         const tr = document.createElement('tr');
         tr.innerHTML = `<td>${no}</td>
-        <td>${NameBook}</td>
-        <td><button class='btn btn-danger'>Hapus</button</td>`
+        <td>${NameBook}<input type='hidden' name='id_buku[]' value=${idBook}></td>
+        <td><button type='button' class='btn btn-danger delete-row'>Hapus</button</td>`;
+        console.log(tr);
         tbody.appendChild(tr);
+    });
+
+    // let tr = document.querySelector('#table tbody tr');
+    // tr.find('delete-row');
+    // Array
+
+    document.querySelector('#tableTrans tbody').addEventListener('click', function(e){
+        if(e.target.classList.contains('delete-row')){
+            e.target.closest('tr').remove();
+        }
     });
 </script>
 </body>

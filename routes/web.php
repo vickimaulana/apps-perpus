@@ -55,6 +55,8 @@ Route::middleware('auth')->group(function () {
     //Pinjam Buku
     Route::resource('transaction', \App\Http\Controllers\TransactionController::class);
     Route::get('get-buku/{id}', [\App\Http\Controllers\TransactionController::class, 'getBukuByIdCategory']);
+    //print
+    Route::get('print-peminjam/{id}', [\App\Http\Controllers\TransactionController::class, 'print']);
 });
 
 // // Halaman utama daftar bangun ruang
