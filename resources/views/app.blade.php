@@ -33,6 +33,8 @@
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
 
+
+
     <!-- =======================================================
   * Template Name: NiceAdmin
   * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -43,6 +45,8 @@
 </head>
 
 <body>
+    @include('sweetalert::alert')
+
 
     <!-- ======= Header ======= -->
     @include('inc.header')
@@ -86,6 +90,7 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     <script>
     let category = document.getElementById('id_kategori');
     category.addEventListener('change', async function() {
@@ -173,6 +178,7 @@
         }
     });
 </script>
+
 </body>
 
 </html>

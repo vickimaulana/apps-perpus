@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Borrows extends Model
 {
+    use SoftDeletes;
+
     protected $fillable = ['id_anggota', 'trans_number', 'return_date', 'note', 'status'];
 
     public function detailBorrows()

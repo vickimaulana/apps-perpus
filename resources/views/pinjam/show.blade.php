@@ -4,7 +4,7 @@
     <div class="row">
         <div align="right" class="col-sm-12">
             <a href="{{ url()->previous() }}" class="btn btn-primary">
-                <i class="bi bi-arrow-left"></i>Kembali
+                <i class="bi bi-arrow-left mb-3"></i>Kembali
             </a>
         </div>
         <div class="col-lg-6">

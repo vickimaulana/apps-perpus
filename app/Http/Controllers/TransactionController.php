@@ -10,6 +10,8 @@ use App\Models\Borrows;
 use App\Models\Book;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class TransactionController extends Controller
 {
@@ -67,11 +69,15 @@ class TransactionController extends Controller
                 ]);
             }
             DB::commit();
-            return redirect()->to('print-peminjam', $insertBorrow->id);
+            Alert::success('Success Title', 'Transaksi berhasil dibuat');
+
+            return redirect()->route('print-peminjam', ['id' => $insertBorrow->id]);
         } catch (\Throwable $th) {
             //throw $th;
             DB::rollBack();
-            // return redirect()->to('transaction');
+            // Alert::success('Upsss!!!', $th->getMessage());
+
+            return redirect()->to('transaction');
         }
     }
 
@@ -106,7 +112,10 @@ class TransactionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $borrow = Borrows::find( $id);
+        $borrow->detailBorrows()->delete();
+        $borrow->delete();
+        return redirect()->to('transaction');
     }
 
     public function getBukuByIdCategory($id_category)
@@ -122,6 +131,35 @@ class TransactionController extends Controller
     {
         $borrow = Borrows::with('member','detailBorrows.book')->find($id_borrow);
         return view('pinjam.print', compact('borrow'));
+    }
+    public function returnBook(Request $request, $id)
+    {
+        $borrow = Borrows::findOrFail($id);//404
+        // $borrow = Borrows::find($id); //blank
+
+        if (!$borrow->actual_return_date) {
+           $fine= 0;
+        }
+        $returnDate = \Carbon\carbon::parse($borrow->return_date)->startOfDay();
+        $actualReturnDate = \Carbon\carbon::parse($borrow->actual_return_date)->startOfDay();
+
+        //lebih besar dari
+        // greaterThan()
+        // if ($actualReturnDate > $returnDate) {
+        if ($actualReturnDate->greaterThan($returnDate)){
+            // 2 * 200000 = actualDate * total denda
+            $late = $returnDate->diffInDays($actualReturnDate);
+            $fine = $late *5000;
+        }
+
+        $borrow->actual_return_date = now();
+        // $borrow->actual_return_date =  Carbon::now();
+        $borrow->fine = $fine;
+        $borrow->status = 0;
+        $borrow->save();
+        Alert::success('Ciee Berhasil','Buku Berhasil Dikembalikan');
+        return redirect()->to('transaction');
+
     }
 }
 

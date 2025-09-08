@@ -3,7 +3,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="index.html">
+            <a class="nav-link collapsed" href="{{url('dashboard')}}">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
@@ -41,6 +41,13 @@
             <a class="nav-link collapsed" href="{{ route('transaction.index') }}">
                 <i class="bi bi-calendar"></i>
                 <span>Pinjam Buku</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('transaction.index') }}">
+                <i class="bi bi-calendar"></i>
+                <span>Pengembalian Buku</span>
             </a>
         </li>
                 {{-- <!-- End Profile Page Nav -->
