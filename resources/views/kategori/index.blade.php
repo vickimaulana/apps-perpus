@@ -7,7 +7,7 @@
     </div>
     <div class="card-body">
         <a href="{{ route('kategori.create') }}" class="btn btn-primary mt-2 mb-2">Create</a>
-        <div class="table teble-responsive">
+        <div class="table table-responsive">
             <table class="table table-bordered text-center">
                 <tr>
                     <th>No</th>

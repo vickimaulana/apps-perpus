@@ -142,7 +142,7 @@
                 </div>
                 <div class="mt-3">
                     <table class="table table-bordered table-primary text-center">
-                        <thead>
+                        <thead class="table-success">
                             <tr>
                                 <th>No Transaksi</th>
                                 <th>Nama Anggota</th>
@@ -159,8 +159,8 @@
                             </tr>
                             @endforeach
                             <tr>
-                                <td>Total Denda</td>
-                                <td class="" colspan="2">{{$totalFines ?? 0}}</td>
+                                <th>Total Denda</th>
+                                <th class="text-bold" colspan="2">{{$totalFines ?? 0}}</th>
                             </tr>
                         </tbody>
                     </table>

@@ -53,11 +53,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('buku/destroy/{id}', [\App\Http\Controllers\BookController::class, 'destroy'])->name('buku.destroy');
 
     //Pinjam Buku
-    Route::resource('transaction', \App\Http\Controllers\TransactionController::class);
+    Route::resource('transaction', \App\Http\Controllers\TransactionController::class)->middleware('role:User');
     Route::get('get-buku/{id}', [\App\Http\Controllers\TransactionController::class, 'getBukuByIdCategory']);
     //print
     Route::get('print-peminjam/{id}', [\App\Http\Controllers\TransactionController::class, 'print'])->name('print-peminjam');
     Route::post('transaction/{id}/return', [\App\Http\Controllers\TransactionController::class, 'returnBook'])->name('transaction.return');
+    Route::resource('role', \App\Http\Controllers\RoleController::class);
+    Route::resource('user', \App\Http\Controllers\UserController::class);
+    Route::get('user/{id}/roles', [\App\Http\Controllers\UserController::class, 'editRole'])->name('user.roles');
+    Route::post('user/{id}/updateRoles', [\App\Http\Controllers\UserController::class, 'updateRoles'])->name('user.updateRoles');
 });
 
 // // Halaman utama daftar bangun ruang
